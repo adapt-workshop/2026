@@ -1,0 +1,273 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schedule = [
+  { time: '09:00–09:05', activity: 'Opening: How should AI Collaborators Adapt?', dur: '5 min' },
+  {
+    time: '09:05–09:35',
+    activity:
+      'Invited Talk: Dr. Naser Al Madi (Colby College) — How Developers Read Code: Eye-Tracking Evidence for Cognitively-Aware AI Collaborators',
+    dur: '30 min',
+  },
+  { session: 'Session I — Mapping Adaptation' },
+  { time: '09:35–09:55', activity: 'ADAPT Pitches (1-min lightning pitches of submitted cards)', dur: '20 min' },
+  {
+    time: '09:55–10:30',
+    activity: 'Building the ADAPT Map (Context → Signal → Adaptation → Consequence)',
+    dur: '35 min',
+  },
+  { time: '10:30–10:55', activity: 'Choosing the Tensions (vote on themes for Session II)', dur: '25 min' },
+  { time: '10:55–11:10', activity: 'Coffee break', dur: '15 min' },
+  { session: 'Session II — Breaking the AI Collaborator' },
+  {
+    time: '11:10–11:45',
+    activity: 'Design an AI That Knows You (breakout groups + Twist Cards)',
+    dur: '35 min',
+  },
+  { time: '11:45–12:10', activity: 'The Anti-ADAPT Debate: What Should an AI Never Adapt?', dur: '25 min' },
+  { time: '12:10–12:35', activity: 'Building the ADAPT Research Agenda', dur: '25 min' },
+  { time: '12:35–12:40', activity: 'Closing: To adapt or not to adapt?', dur: '5 min' },
+];
+
+const goals = [
+  {
+    title: 'Map the design space',
+    body: 'by connecting developer contexts, observable signals, possible AI adaptations, and their intended and unintended consequences.',
+  },
+  {
+    title: 'Identify boundaries for adaptation',
+    body: 'including aspects of human–AI collaboration that should remain predictable, stable, transparent, or under explicit developer control.',
+  },
+  {
+    title: 'Surface methodological challenges',
+    body: 'involved in sensing developer cognitive state and evaluating adaptive AI behaviour in realistic software development settings.',
+  },
+  {
+    title: 'Build a research agenda',
+    body: 'around the opportunities, tensions, and risks introduced when AI collaborators begin to adapt to the developers they work with.',
+  },
+];
+
+const questions = [
+  {
+    title: 'The AI knows when you are struggling.',
+    body: 'An AI collaborator may detect repeated errors, navigation patterns, hesitation, or unsuccessful attempts — but difficulty is not necessarily a problem to eliminate; struggle may be part of learning and problem solving. How should an AI distinguish between a moment in which assistance would genuinely help and one in which intervention would interrupt productive reasoning?',
+  },
+  {
+    title: 'The AI knows what you know.',
+    body: 'Should an AI assistant behave differently for a novice and an expert? Expertise is contextual and difficult to model: a developer may be highly experienced in one domain and a novice in another. What happens when the AI’s model of the developer is incomplete or simply wrong?',
+  },
+  {
+    title: 'The AI knows when to remain silent.',
+    body: 'Could the most intelligent behaviour of an AI assistant sometimes be not to assist? As AI systems become increasingly proactive, deciding when not to intervene may become as important as deciding what assistance to provide.',
+  },
+  {
+    title: 'The AI adapts itself.',
+    body: 'An AI collaborator may reorganize its explanations, shift its level of proactivity, or change what it chooses to surface according to context — but collaboration also depends on predictability and on the trust developers build through consistent behaviour. What should the AI adapt, and what should remain stable?',
+  },
+  {
+    title: 'The AI becomes a collaborator rather than a tool.',
+    body: 'As AI moves from suggesting individual lines of code toward agents capable of planning, implementing, testing, and modifying software, developers may no longer need to observe every action — but they still need to understand, supervise, challenge, and redirect the system. If AI becomes a collaborator rather than simply a tool, what should it actually communicate, and when?',
+  },
+];
+
+const organisers = [
+  {
+    name: 'Yasmine Elfares',
+    initials: 'YE',
+    affiliation: 'University of Glasgow, United Kingdom',
+    email: 'Yasmine.Elfares@glasgow.ac.uk',
+    color: '#4d3df7',
+    bio: 'Second-year PhD student at the University of Glasgow, previously at the German University in Cairo, Egypt. Her research focuses on adaptive developer tools, gaze-informed human–AI interaction, and cognitively-aware AI design, with a particular focus on how eye-tracking and other implicit cognitive signals can be used to build AI systems that better understand and support human collaborators. She conducts her PhD on cognitively-aware human–AI collaboration at the Glasgow Interactive Systems Section (GIST, SIRIUS Lab) and the Information, Data and Analysis Section at the University of Glasgow. She has served as Web Chair for MUM 2026, PC Member for ETRA 2026 (Short Papers), and Student Volunteer for EASE 2026.',
+  },
+  {
+    name: 'Sofia Marilina Glorioso',
+    initials: 'SG',
+    affiliation: 'University of Enna "Kore", Italy',
+    email: 'sofiamarilina.glorioso@unikorestudent.it',
+    color: '#7a3df7',
+    bio: 'Second-year PhD student in Intelligent Systems for Engineering at the University of Enna "Kore" (Italy), supported by a scholarship co-funded by STMicroelectronics. She received her Master’s degree in Artificial Intelligence and Computer Security Engineering, summa cum laude, in 2024. Her research focuses on efficient neural networks and multimodal data processing for resource-constrained devices. She has also conducted research at the University of Glasgow on human–machine interaction and usable security and presented her work at major international conferences.',
+  },
+  {
+    name: 'Andrea Pietro Arena',
+    initials: 'AA',
+    affiliation: 'University of Enna "Kore", Italy',
+    email: 'andreapietro.arena@unikorestudent.it',
+    color: '#3d6ef7',
+    bio: 'First-year PhD student in Intelligent Systems for Engineering at the University of Enna "Kore" (Italy). He earned his master’s degree in Artificial Intelligence and Computer Security Engineering from the same university. His academic interests include artificial intelligence, cyber security, and advanced engineering technologies, with a particular focus on software development. His doctoral research focuses on the development of innovative intelligent systems and their practical applications.',
+  },
+  {
+    name: 'Yao Wang',
+    initials: 'YW',
+    affiliation: 'University of Stuttgart, Germany',
+    email: 'Yao.Wang@vis.uni-stuttgart.de',
+    color: '#372bb0',
+    bio: 'Postdoctoral researcher at the University of Stuttgart, Germany. He received the B.Sc. and M.Sc. degrees from Peking University, China, and the PhD degree in Information Technology and Electrical Engineering from the University of Stuttgart, summa cum laude, in 2024. His research interests include human–computer interaction, data visualisation, and computer vision. He has served as Short Paper Chair for ETRA 2026 and 2027, and as Workshop Chair for ETRA 2024 and 2025.',
+  },
+];
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="hero shell">
+    <div class="hero__kicker"><span class="dot"></span> ADAPT workshop@MUM 2026 &middot; Glasgow</div>
+    <h1>Adaptive Developer–<em>AI</em> Programming Tools</h1>
+    <p class="hero__subtitle">
+      Towards cognitively-aware human–AI collaboration in software development — inferring attention,
+      confusion, and cognitive load, and asking when an AI collaborator should adapt to it.
+    </p>
+    <div class="hero__meta">
+      <span class="tag">Human–AI Collaboration</span>
+      <span class="tag">Cognitively-Aware AI</span>
+      <span class="tag">Gaze-Informed Interaction</span>
+      <span class="tag">Ubiquitous &amp; Wearable Sensing</span>
+    </div>
+  </section>
+
+  <!-- Overview -->
+  <section id="overview" class="section shell">
+    <div class="section__head" data-reveal>
+      <div>
+        <div class="section__eyebrow"><span class="num">01</span><span class="label">Overview</span></div>
+        <h2 class="section__title">Goal of the workshop</h2>
+      </div>
+      <p class="section__intro">Exploring what it means for AI collaborators to become cognitively aware.</p>
+    </div>
+
+    <div class="overview-grid">
+      <div data-reveal>
+        <p class="lead-text">
+          AI assistants are becoming embedded in software development, yet they collaborate the same way with
+          every developer — largely unaware of attention, expertise, confusion, or cognitive load. ADAPT is a
+          half-day workshop exploring what it would mean for human–AI collaboration to become
+          <strong>cognitively aware</strong>: inferring cognitive state from signals such as gaze, interaction
+          patterns, and physiological sensing, and adapting the AI's behaviour accordingly.
+        </p>
+        <p class="lead-text">
+          Rather than assuming such awareness is inherently beneficial, we invite researchers and practitioners
+          across HCI, ubiquitous computing, and software engineering to examine what cognitive signals should
+          inform an AI's behaviour, how inference should be communicated, and when an AI should deliberately
+          remain unaware. Participants pitch design proposals pairing a developer signal with an AI adaptation,
+          map them into a shared design space, redesign them under failure scenarios, and debate what should
+          never adapt — producing a design map and research agenda for cognitively-aware human–AI collaboration.
+        </p>
+      </div>
+
+      <ul class="goal-list" data-reveal="stagger">
+        {goals.map((g, i) => (
+          <li>
+            <span class="goal-num">0{i + 1}</span>
+            <div>
+              <strong>{g.title}</strong>
+              <span class="body">{g.body}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="question-list">
+      <div class="section__head" data-reveal style="margin-top: 5rem;">
+        <div>
+          <h3 class="section__title" style="font-size: clamp(1.6rem, 3vw, 2.2rem);">Five questions for cognitively-aware collaboration</h3>
+        </div>
+        <p class="section__intro">Starting points for the workshop's activities — to challenge, combine, and extend.</p>
+      </div>
+      <div data-reveal="stagger">
+        {questions.map((q, i) => (
+          <div class="question-row">
+            <span class="q-num">0{i + 1}</span>
+            <div>
+              <h4>{q.title}</h4>
+              <p>{q.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section id="schedule" class="section section--tint shell">
+    <div class="section__head" data-reveal>
+      <div>
+        <div class="section__eyebrow"><span class="num">02</span><span class="label">Schedule</span></div>
+        <h2 class="section__title">Workshop Schedule (tentative)</h2>
+      </div>
+      <p class="section__intro"><a href="https://time.is/Glasgow">Check UTC time now</a></p>
+    </div>
+
+    <div class="schedule-list" data-reveal>
+      {schedule.map((row) =>
+        row.session ? (
+          <div class="schedule-session"><span>{row.session}</span></div>
+        ) : (
+          <div class="schedule-row">
+            <span class="time">{row.time}</span>
+            <span class="activity">{row.activity}</span>
+            <span class="dur">{row.dur}</span>
+          </div>
+        )
+      )}
+    </div>
+  </section>
+
+  <!-- Keynote -->
+  <section id="keynote" class="section shell">
+    <div class="section__head" data-reveal>
+      <div>
+        <div class="section__eyebrow"><span class="num">03</span><span class="label">Keynote Speaker</span></div>
+        <h2 class="section__title">Invited talk</h2>
+      </div>
+    </div>
+
+    <div class="keynote-panel" data-reveal>
+      <div class="keynote-visual">
+        <span class="initials">NA</span>
+      </div>
+      <div class="keynote-body">
+        <div class="role">Colby College</div>
+        <h3>Dr. Naser Al Madi</h3>
+        <p class="affil">Opening invited talk &middot; 09:05–09:35</p>
+        <p class="talk-title">How Developers Read Code: Eye-Tracking Evidence for Cognitively-Aware AI Collaborators</p>
+        <p class="lead-text">
+          Dr. Al Madi's research models how developers read and comprehend source code using eye-tracking
+          and gaze analysis, including empirical work on eye movement control during program reading. His
+          talk grounds ADAPT's central question in measured data — where attention concentrates during
+          debugging, how reading patterns differ between novices and experts, and what eye movements can
+          (and cannot) reliably indicate about comprehension difficulty. This evidence base gives
+          participants a concrete, validated signal to reason from when pitching ADAPT Cards, and connects
+          the workshop's HCI/AI-assisted-programming focus to the eye-tracking, wearable-sensing, and
+          mobile-context-awareness research that MUM has long hosted.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Organisers -->
+  <section id="organisers" class="section section--tint shell">
+    <div class="section__head" data-reveal>
+      <div>
+        <div class="section__eyebrow"><span class="num">04</span><span class="label">Organising Team</span></div>
+        <h2 class="section__title">Organisers</h2>
+      </div>
+    </div>
+
+    <div class="organiser-grid" data-reveal="stagger">
+      {organisers.map((p) => (
+        <div class="organiser-card">
+          <div class="organiser-top">
+            <div class="organiser-avatar" style={`background:${p.color};`}>{p.initials}</div>
+            <div>
+              <div class="organiser-name">{p.name}</div>
+              <div class="organiser-affil">{p.affiliation}</div>
+            </div>
+          </div>
+          <p class="organiser-bio">{p.bio}</p>
+          <a class="organiser-email" href={`mailto:${p.email}`}>{p.email}</a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+</Layout>

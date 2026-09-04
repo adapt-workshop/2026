@@ -1,0 +1,154 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'ADAPT: Adaptive Developer–AI Programming Tools — MUM 2026 Workshop',
+  description = 'ADAPT is a workshop at MUM 2026 exploring cognitively-aware human–AI collaboration in software development.',
+} = Astro.props;
+
+const navLinks = [
+  { href: '#overview', label: 'Overview', num: '01' },
+  { href: '#schedule', label: 'Schedule', num: '02' },
+  { href: '#keynote', label: 'Keynote', num: '03' },
+  { href: '#organisers', label: 'Organisers', num: '04' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Bootstrap CSS (grid + responsive utilities only; visuals are overridden) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href={`${import.meta.env.BASE_URL}styles/global.css`} />
+    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Top navigation -->
+    <header class="adapt-nav" id="siteNav">
+      <div class="adapt-nav__inner">
+        <a class="adapt-nav__brand" href="#top">
+          <span class="mark">ADAPT</span>
+          <span class="mark-sub">MUM&nbsp;2026</span>
+        </a>
+
+        <button
+          class="adapt-nav__toggle"
+          type="button"
+          id="navToggle"
+          aria-controls="navMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="adapt-nav__menu" id="navMenu" aria-label="Primary">
+          <ol>
+            {navLinks.map((link) => (
+              <li>
+                <a href={link.href}>
+                  <span class="num">{link.num}</span>
+                  <span class="label">{link.label}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="adapt-footer" id="top-anchor">
+      <div class="adapt-footer__inner">
+        <div class="adapt-footer__brand">
+          <span class="mark">ADAPT</span>
+          <p>Adaptive Developer–AI Programming Tools</p>
+        </div>
+        <nav class="adapt-footer__links" aria-label="Footer">
+          {navLinks.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </nav>
+        <div class="adapt-footer__meta">
+          <p>ADAPT workshop &middot; MUM 2026</p>
+          <p>Glasgow, United Kingdom</p>
+        </div>
+      </div>
+      <div class="adapt-footer__bottom">
+        <p>&copy; 2026 ADAPT Workshop Organisers.</p>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+
+    <!-- Nav toggle + scroll behaviour (no framework JS needed) -->
+    <script>
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('navMenu');
+      const nav = document.getElementById('siteNav');
+
+      toggle?.addEventListener('click', () => {
+        const isOpen = menu?.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(Boolean(isOpen)));
+        nav?.classList.toggle('menu-open', Boolean(isOpen));
+      });
+
+      menu?.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => {
+          menu.classList.remove('is-open');
+          nav?.classList.remove('menu-open');
+          toggle?.setAttribute('aria-expanded', 'false');
+        })
+      );
+
+      const onScroll = () => {
+        nav?.classList.toggle('is-scrolled', window.scrollY > 24);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Scroll-reveal
+      const revealEls = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window && revealEls.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>
