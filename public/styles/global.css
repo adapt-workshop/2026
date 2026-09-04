@@ -123,7 +123,7 @@ a {
 }
 
 .adapt-nav__brand img {
-  height: clamp(2.6rem, 5vw, 3.1rem);
+  height: clamp(6rem, 10vw, 8rem);
   width: auto;
   display: block;
 }
@@ -390,6 +390,10 @@ a {
 
 .section--tint {
   background: var(--paper-2);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+  margin-top: clamp(2rem, 4vw, 4rem);
+  margin-bottom: clamp(2rem, 4vw, 4rem);
 }
 
 .section__head {
@@ -426,11 +430,11 @@ a {
 .section__title {
   font-size: clamp(2rem, 4vw, 3.1rem);
   font-weight: 600;
-  max-width: 18ch;
+  max-width: 28ch;
 }
 
 .section__intro {
-  max-width: 30ch;
+  max-width: 36ch;
   color: var(--muted);
   font-size: 1.02rem;
   margin: 0;
@@ -539,10 +543,10 @@ a {
 
 .schedule-row {
   display: grid;
-  grid-template-columns: clamp(6.5rem, 12vw, 9rem) 1fr auto;
-  gap: clamp(1rem, 3vw, 2rem);
-  align-items: baseline;
-  padding: 1.35rem 0;
+  grid-template-columns: 6px 1fr;
+  column-gap: clamp(0.9rem, 2.5vw, 1.5rem);
+  align-items: center;
+  padding: 0.85rem 0;
   border-bottom: 1px solid var(--border);
   transition: background 0.25s ease;
 }
@@ -551,7 +555,21 @@ a {
   background: rgba(77, 61, 247, 0.04);
 }
 
-.schedule-row .time {
+/* Height encodes duration: taller bar = longer block, set inline per-row via durMin * PX_PER_MIN. */
+.schedule-row__bar {
+  width: 6px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.schedule-row__body {
+  display: grid;
+  grid-template-columns: clamp(6.5rem, 12vw, 9rem) 1fr;
+  column-gap: clamp(1rem, 3vw, 2rem);
+  align-items: center;
+}
+
+.schedule-row__body .time {
   font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 500;
@@ -559,16 +577,9 @@ a {
   white-space: nowrap;
 }
 
-.schedule-row .activity {
+.schedule-row__body .activity {
   font-size: 0.98rem;
   color: var(--ink);
-}
-
-.schedule-row .dur {
-  font-size: 0.8rem;
-  color: var(--muted);
-  white-space: nowrap;
-  text-align: right;
 }
 
 .schedule-session {
@@ -604,12 +615,9 @@ a {
 }
 
 @media (max-width: 575.98px) {
-  .schedule-row {
+  .schedule-row__body {
     grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
-  .schedule-row .dur {
-    text-align: left;
+    row-gap: 0.35rem;
   }
 }
 
@@ -631,9 +639,6 @@ a {
 
 .keynote-visual {
   background: linear-gradient(155deg, var(--ink) 0%, #2a2470 65%, var(--accent) 130%);
-  display: flex;
-  align-items: flex-end;
-  padding: clamp(2rem, 4vw, 3rem);
   min-height: 280px;
   position: relative;
   overflow: hidden;
@@ -649,14 +654,17 @@ a {
   border-radius: 50%;
   background: rgba(255, 90, 43, 0.35);
   filter: blur(10px);
+  z-index: 0;
 }
 
-.keynote-visual .initials {
-  font-family: var(--font-display);
-  font-size: clamp(3.5rem, 7vw, 5.5rem);
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.92);
-  position: relative;
+.keynote-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Face detected near the top-center of the source photo. */
+  object-position: 49% 25%;
   z-index: 1;
 }
 
@@ -729,17 +737,14 @@ a {
 }
 
 .organiser-avatar {
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 3.8rem;
+  height: 3.8rem;
   border-radius: 50%;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 1.15rem;
+  object-fit: cover;
+  object-position: center;
+  border: 2.5px solid;
   flex-shrink: 0;
+  background: var(--paper-2);
 }
 
 .organiser-name {
@@ -761,6 +766,13 @@ a {
   margin-bottom: 1.1rem;
 }
 
+.organiser-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.75rem;
+}
+
 .organiser-email {
   display: inline-flex;
   align-items: center;
@@ -777,6 +789,25 @@ a {
 .organiser-email:hover {
   color: var(--accent);
   border-color: var(--accent);
+}
+
+.organiser-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-ink);
+  text-decoration: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  padding: 0.3rem 0.75rem;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.organiser-link:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
 }
 
 /* ============ Contact ============ */
@@ -885,7 +916,6 @@ a {
 .adapt-footer__brand p {
   color: var(--muted);
   font-size: 0.92rem;
-  max-width: 26ch;
   margin: 0;
 }
 

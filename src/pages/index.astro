@@ -2,32 +2,37 @@
 import Layout from '../layouts/Layout.astro';
 
 const schedule = [
-  { time: '09:00–09:05', activity: 'Opening: How should AI Collaborators Adapt?', dur: '5 min' },
+  { time: '09:00–09:05', activity: 'Opening: How should AI Collaborators Adapt?', durMin: 5 },
   {
     time: '09:05–09:35',
     activity:
       'Invited Talk: Dr. Naser Al Madi (Colby College) — How Developers Read Code: Eye-Tracking Evidence for Cognitively-Aware AI Collaborators',
-    dur: '30 min',
+    durMin: 30,
   },
   { session: 'Session I — Mapping Adaptation' },
-  { time: '09:35–09:55', activity: 'ADAPT Pitches (1-min lightning pitches of submitted cards)', dur: '20 min' },
+  { time: '09:35–09:55', activity: 'ADAPT Pitches (1-min lightning pitches of submitted cards)', durMin: 20 },
   {
     time: '09:55–10:30',
     activity: 'Building the ADAPT Map (Context → Signal → Adaptation → Consequence)',
-    dur: '35 min',
+    durMin: 35,
   },
-  { time: '10:30–10:55', activity: 'Choosing the Tensions (vote on themes for Session II)', dur: '25 min' },
-  { time: '10:55–11:10', activity: 'Coffee break', dur: '15 min' },
+  { time: '10:30–10:55', activity: 'Choosing the Tensions (vote on themes for Session II)', durMin: 25 },
+  { time: '10:55–11:10', activity: 'Coffee break', durMin: 15 },
   { session: 'Session II — Breaking the AI Collaborator' },
   {
     time: '11:10–11:45',
     activity: 'Design an AI That Knows You (breakout groups + Twist Cards)',
-    dur: '35 min',
+    durMin: 35,
   },
-  { time: '11:45–12:10', activity: 'The Anti-ADAPT Debate: What Should an AI Never Adapt?', dur: '25 min' },
-  { time: '12:10–12:35', activity: 'Building the ADAPT Research Agenda', dur: '25 min' },
-  { time: '12:35–12:40', activity: 'Closing: To adapt or not to adapt?', dur: '5 min' },
+  { time: '11:45–12:10', activity: 'The Anti-ADAPT Debate: What Should an AI Never Adapt?', durMin: 25 },
+  { time: '12:10–12:35', activity: 'Building the ADAPT Research Agenda', durMin: 25 },
+  { time: '12:35–12:40', activity: 'Closing: To adapt or not to adapt? That is a Question.', durMin: 5 },
 ];
+
+// Height of each schedule block's duration bar encodes its length: px = durMin * PX_PER_MIN.
+const PX_PER_MIN = 2.4;
+const MIN_BAR_PX = 10;
+const barHeight = (durMin) => Math.max(durMin * PX_PER_MIN, MIN_BAR_PX);
 
 const goals = [
   {
@@ -75,34 +80,46 @@ const organisers = [
   {
     name: 'Yasmine Elfares',
     initials: 'YE',
+    photo: 'organisers/avatars/yasmine.jpg',
     affiliation: 'University of Glasgow, United Kingdom',
-    email: 'Yasmine.Elfares@glasgow.ac.uk',
+    email: 'yasmine.elfares@glasgow.ac.uk',
     color: '#4d3df7',
     bio: 'Second-year PhD student at the University of Glasgow, previously at the German University in Cairo, Egypt. Her research focuses on adaptive developer tools, gaze-informed human–AI interaction, and cognitively-aware AI design, with a particular focus on how eye-tracking and other implicit cognitive signals can be used to build AI systems that better understand and support human collaborators. She conducts her PhD on cognitively-aware human–AI collaboration at the Glasgow Interactive Systems Section (GIST, SIRIUS Lab) and the Information, Data and Analysis Section at the University of Glasgow. She has served as Web Chair for MUM 2026, PC Member for ETRA 2026 (Short Papers), and Student Volunteer for EASE 2026.',
+    linkLabel: 'Google Scholar',
+    linkUrl: 'https://scholar.google.com/citations?user=xxm9C6oAAAAJ&hl=en',
   },
   {
     name: 'Sofia Marilina Glorioso',
     initials: 'SG',
+    photo: 'organisers/avatars/sofia.jpg',
     affiliation: 'University of Enna "Kore", Italy',
     email: 'sofiamarilina.glorioso@unikorestudent.it',
     color: '#7a3df7',
     bio: 'Second-year PhD student in Intelligent Systems for Engineering at the University of Enna "Kore" (Italy), supported by a scholarship co-funded by STMicroelectronics. She received her Master’s degree in Artificial Intelligence and Computer Security Engineering, summa cum laude, in 2024. Her research focuses on efficient neural networks and multimodal data processing for resource-constrained devices. She has also conducted research at the University of Glasgow on human–machine interaction and usable security and presented her work at major international conferences.',
+    linkLabel: 'Google Scholar',
+    linkUrl: 'https://scholar.google.com/citations?user=azUk0jMAAAAJ',
   },
   {
     name: 'Andrea Pietro Arena',
     initials: 'AA',
+    photo: 'organisers/avatars/andrea.jpg',
     affiliation: 'University of Enna "Kore", Italy',
     email: 'andreapietro.arena@unikorestudent.it',
     color: '#3d6ef7',
     bio: 'First-year PhD student in Intelligent Systems for Engineering at the University of Enna "Kore" (Italy). He earned his master’s degree in Artificial Intelligence and Computer Security Engineering from the same university. His academic interests include artificial intelligence, cyber security, and advanced engineering technologies, with a particular focus on software development. His doctoral research focuses on the development of innovative intelligent systems and their practical applications.',
+    linkLabel: 'LinkedIn',
+    linkUrl: 'https://www.linkedin.com/in/andrea-pietro-arena/',
   },
   {
     name: 'Yao Wang',
     initials: 'YW',
+    photo: 'organisers/avatars/yao.jpg',
     affiliation: 'University of Stuttgart, Germany',
-    email: 'Yao.Wang@vis.uni-stuttgart.de',
+    email: 'yao.wang@vis.uni-stuttgart.de',
     color: '#372bb0',
     bio: 'Postdoctoral researcher at the University of Stuttgart, Germany. He received the B.Sc. and M.Sc. degrees from Peking University, China, and the PhD degree in Information Technology and Electrical Engineering from the University of Stuttgart, summa cum laude, in 2024. His research interests include human–computer interaction, data visualisation, and computer vision. He has served as Short Paper Chair for ETRA 2026 and 2027, and as Workshop Chair for ETRA 2024 and 2025.',
+    linkLabel: 'Google Scholar',
+    linkUrl: 'https://scholar.google.com/citations?user=X8je0QsAAAAJ',
   },
 ];
 ---
@@ -203,9 +220,11 @@ const organisers = [
           <div class="schedule-session"><span>{row.session}</span></div>
         ) : (
           <div class="schedule-row">
-            <span class="time">{row.time}</span>
-            <span class="activity">{row.activity}</span>
-            <span class="dur">{row.dur}</span>
+            <span class="schedule-row__bar" style={`height:${barHeight(row.durMin)}px`} aria-hidden="true"></span>
+            <div class="schedule-row__body">
+              <span class="time">{row.time}</span>
+              <span class="activity">{row.activity}</span>
+            </div>
           </div>
         )
       )}
@@ -223,7 +242,12 @@ const organisers = [
 
     <div class="keynote-panel" data-reveal>
       <div class="keynote-visual">
-        <span class="initials">NA</span>
+        <img
+          class="keynote-photo"
+          src={`${import.meta.env.BASE_URL}organisers/avatars/naser.jpg`}
+          alt="Dr. Naser Al Madi"
+          loading="lazy"
+        />
       </div>
       <div class="keynote-body">
         <div class="role">Colby College</div>
@@ -257,14 +281,23 @@ const organisers = [
       {organisers.map((p) => (
         <div class="organiser-card">
           <div class="organiser-top">
-            <div class="organiser-avatar" style={`background:${p.color};`}>{p.initials}</div>
+            <img
+              class="organiser-avatar"
+              src={`${import.meta.env.BASE_URL}${p.photo}`}
+              alt={p.name}
+              style={`border-color:${p.color};`}
+              loading="lazy"
+            />
             <div>
               <div class="organiser-name">{p.name}</div>
               <div class="organiser-affil">{p.affiliation}</div>
             </div>
           </div>
           <p class="organiser-bio">{p.bio}</p>
-          <a class="organiser-email" href={`mailto:${p.email}`}>{p.email}</a>
+          <div class="organiser-links">
+            <a class="organiser-email" href={`mailto:${p.email}`}>{p.email}</a>
+            <a class="organiser-link" href={p.linkUrl} target="_blank" rel="noopener noreferrer">{p.linkLabel} ↗</a>
+          </div>
         </div>
       ))}
     </div>
