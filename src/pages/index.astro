@@ -4,29 +4,32 @@ import Layout from '../layouts/Layout.astro';
 const schedule = [
   { time: '09:00–09:05', activity: 'Opening: How should AI Collaborators Adapt?', durMin: 5 },
   {
-    time: '09:05–09:35',
+    time: '09:05–09:45',
     activity:
       'Invited Talk: Dr. Naser Al Madi (Colby College) — How Developers Read Code: Eye-Tracking Evidence for Cognitively-Aware AI Collaborators',
-    durMin: 30,
+    durMin: 40,
   },
+  { time: '09:45–09:50', activity: 'Buffer', durMin: 5 },
   { session: 'Session I — Mapping Adaptation' },
-  { time: '09:35–09:55', activity: 'ADAPT Pitches (1-min lightning pitches of submitted cards)', durMin: 20 },
+  { time: '09:50–10:10', activity: 'ADAPT Pitches (1-min lightning pitches of submitted cards)', durMin: 20 },
   {
-    time: '09:55–10:30',
+    time: '10:10–10:45',
     activity: 'Building the ADAPT Map (Context → Signal → Adaptation → Consequence)',
     durMin: 35,
   },
-  { time: '10:30–10:55', activity: 'Choosing the Tensions (vote on themes for Session II)', durMin: 25 },
-  { time: '10:55–11:10', activity: 'Coffee break', durMin: 15 },
+  { time: '10:45–11:10', activity: 'Choosing the Tensions (vote on themes for Session II)', durMin: 25 },
+  { time: '11:10–11:15', activity: 'Buffer', durMin: 5 },
+  { time: '11:15–11:30', activity: 'Coffee break', durMin: 15 },
   { session: 'Session II — Breaking the AI Collaborator' },
   {
-    time: '11:10–11:45',
+    time: '11:30–12:05',
     activity: 'Design an AI That Knows You (breakout groups + Twist Cards)',
     durMin: 35,
   },
-  { time: '11:45–12:10', activity: 'The Anti-ADAPT Debate: What Should an AI Never Adapt?', durMin: 25 },
-  { time: '12:10–12:35', activity: 'Building the ADAPT Research Agenda', durMin: 25 },
-  { time: '12:35–12:40', activity: 'Closing: To adapt or not to adapt? That is a Question.', durMin: 5 },
+  { time: '12:05–12:30', activity: 'The Anti-ADAPT Debate: What Should an AI Never Adapt?', durMin: 25 },
+  { time: '12:30–12:55', activity: 'Building the ADAPT Research Agenda', durMin: 25 },
+  { time: '12:55–13:00', activity: 'Buffer', durMin: 5 },
+  { time: '13:00–13:05', activity: 'Closing: To adapt or not to adapt?', durMin: 5 },
 ];
 
 // Height of each schedule block's duration bar encodes its length: px = durMin * PX_PER_MIN.
@@ -252,8 +255,8 @@ const organisers = [
       <div class="keynote-body">
         <div class="role">Colby College</div>
         <h3>Dr. Naser Al Madi</h3>
-        <p class="affil">Opening invited talk &middot; 09:05–09:35</p>
-        <p class="talk-title">How Developers Read Code: Eye-Tracking Evidence for Cognitively-Aware AI Collaborators</p>
+        <p class="affil">Opening invited talk &middot; 09:05–09:45</p>
+        <p class="talk-title">Eye-Tracking Insights for AI Developer Tools</p>
         <p class="lead-text">
           Dr. Al Madi's research models how developers read and comprehend source code using eye-tracking
           and gaze analysis, including empirical work on eye movement control during program reading. His
@@ -264,6 +267,7 @@ const organisers = [
           the workshop's HCI/AI-assisted-programming focus to the eye-tracking, wearable-sensing, and
           mobile-context-awareness research that MUM has long hosted.
         </p>
+        <a class="organiser-link" href="https://cs.colby.edu/nsalmadi/" target="_blank" rel="noopener noreferrer">Personal Website ↗</a>
       </div>
     </div>
   </section>
