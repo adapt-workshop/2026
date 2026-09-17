@@ -11,9 +11,10 @@ const {
 
 const navLinks = [
   { href: '#overview', label: 'Overview', num: '01' },
-  { href: '#schedule', label: 'Schedule', num: '02' },
-  { href: '#keynote', label: 'Keynote', num: '03' },
-  { href: '#organisers', label: 'Organisers', num: '04' },
+  { href: '#participate', label: 'Participate', num: '02' },
+  { href: '#schedule', label: 'Schedule', num: '03' },
+  { href: '#keynote', label: 'Keynote', num: '04' },
+  { href: '#organisers', label: 'Organisers', num: '05' },
 ];
 ---
 
@@ -87,16 +88,16 @@ const navLinks = [
         <div class="adapt-footer__brand">
           <img src={`${import.meta.env.BASE_URL}ADAPT_logo.png`} alt="ADAPT — MUM 2026" />
           <p>Adaptive Developer–AI Programming Tools</p>
+          <p class="adapt-footer__meta">
+            ADAPT workshop &middot; <a href="https://www.mum-conf.org/2026/" target="_blank" rel="noopener noreferrer">MUM 2026</a><br />
+            Glasgow, United Kingdom
+          </p>
         </div>
         <nav class="adapt-footer__links" aria-label="Footer">
           {navLinks.map((link) => (
             <a href={link.href}>{link.label}</a>
           ))}
         </nav>
-        <div class="adapt-footer__meta">
-          <p>ADAPT workshop &middot; MUM 2026</p>
-          <p>Glasgow, United Kingdom</p>
-        </div>
       </div>
       <div class="adapt-footer__bottom">
         <p>&copy; 2026 ADAPT Workshop Organisers.</p>
