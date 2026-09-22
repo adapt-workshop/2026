@@ -342,6 +342,13 @@ a {
   align-items: center;
 }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1rem;
+  margin-top: clamp(2.75rem, 5vw, 4rem);
+}
+
 .tag {
   display: inline-flex;
   align-items: baseline;
@@ -412,6 +419,8 @@ a {
 .section {
   padding: clamp(3rem, 6vw, 4.5rem) 0;
   border-bottom: 1px solid var(--border);
+  /* Clears the fixed nav (~93-104px) so anchor jumps land above the section heading. */
+  scroll-margin-top: clamp(6.5rem, 10vw, 8rem);
 }
 
 .section--tint {
@@ -586,12 +595,27 @@ a {
   text-decoration: none;
   padding: 0.85rem 1.85rem;
   border-radius: 100px;
-  transition: background 0.25s ease, transform 0.25s ease;
+  border: 1px solid var(--ink);
+  transition: background 0.25s ease, transform 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 .cta-button:hover {
   background: var(--accent);
+  border-color: var(--accent);
   transform: translateY(-2px);
+}
+
+/* Declared after .cta-button:hover so the ghost variant's hover state wins
+   (both selectors have equal specificity). */
+.cta-button--ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--border-strong);
+}
+
+.cta-button--ghost:hover {
+  background: transparent;
+  border-color: var(--accent);
 }
 
 /* ============ Schedule ============ */
