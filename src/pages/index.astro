@@ -2,34 +2,31 @@
 import Layout from '../layouts/Layout.astro';
 
 const schedule = [
-  { time: '09:00–09:05', activity: 'Opening: How should AI Collaborators Adapt?', durMin: 5 },
+  { time: '14:00–14:05', activity: 'Opening: How should AI Collaborators Adapt?', durMin: 5 },
   {
-    time: '09:05–09:45',
+    time: '14:05–14:45',
     activity:
       'Invited Talk: Dr. Naser Al Madi (Colby College) — How Developers Read Code: Eye-Tracking Evidence for Cognitively-Aware AI Collaborators',
     durMin: 40,
   },
-  { time: '09:45–09:50', activity: 'Buffer', durMin: 5 },
   { session: 'Session I — Mapping Adaptation' },
-  { time: '09:50–10:10', activity: 'ADAPT Pitches (1-min lightning pitches of submitted cards)', durMin: 20 },
+  { time: '14:45–15:05', activity: 'ADAPT Pitches (1-min lightning pitches of submitted cards)', durMin: 20 },
   {
-    time: '10:10–10:45',
+    time: '15:05–15:40',
     activity: 'Building the ADAPT Map (Context → Signal → Adaptation → Consequence)',
     durMin: 35,
   },
-  { time: '10:45–11:10', activity: 'Choosing the Tensions (vote on themes for Session II)', durMin: 25 },
-  { time: '11:10–11:15', activity: 'Buffer', durMin: 5 },
-  { time: '11:15–11:30', activity: 'Coffee break', durMin: 15 },
+  { time: '15:40–15:55', activity: 'Choosing the Tensions (vote on themes for Session II)', durMin: 15 },
+  { time: '15:55–16:10', activity: 'Coffee break', durMin: 15, kind: 'break' },
   { session: 'Session II — Breaking the AI Collaborator' },
   {
-    time: '11:30–12:05',
+    time: '16:10–16:45',
     activity: 'Design an AI That Knows You (breakout groups + Twist Cards)',
     durMin: 35,
   },
-  { time: '12:05–12:30', activity: 'The Anti-ADAPT Debate: What Should an AI Never Adapt?', durMin: 25 },
-  { time: '12:30–12:55', activity: 'Building the ADAPT Research Agenda', durMin: 25 },
-  { time: '12:55–13:00', activity: 'Buffer', durMin: 5 },
-  { time: '13:00–13:05', activity: 'Closing: To adapt or not to adapt?', durMin: 5 },
+  { time: '16:45–17:05', activity: 'The Anti-ADAPT Debate: What Should an AI Never Adapt?', durMin: 20 },
+  { time: '17:05–17:25', activity: 'Building the ADAPT Research Agenda', durMin: 20 },
+  { time: '17:25–17:30', activity: 'Closing: To adapt or not to adapt?', durMin: 5 },
 ];
 
 // Height of each schedule block's duration bar encodes its length: px = durMin * PX_PER_MIN.
@@ -248,6 +245,7 @@ const organisers = [
       <div>
         <div class="section__eyebrow"><span class="num">03</span><span class="label">Schedule</span></div>
         <h2 class="section__title">Workshop Schedule (tentative)</h2>
+        <p class="schedule-date">December 1, 2026</p>
       </div>
       <p class="section__intro"><a href="https://time.is/Glasgow">Check UTC time now</a></p>
     </div>
@@ -257,11 +255,11 @@ const organisers = [
         row.session ? (
           <div class="schedule-session"><span>{row.session}</span></div>
         ) : (
-          <div class="schedule-row">
+          <div class={`schedule-row${row.kind === 'break' ? ' schedule-row--break' : ''}`}>
             <span class="schedule-row__bar" style={`height:${barHeight(row.durMin)}px`} aria-hidden="true"></span>
             <div class="schedule-row__body">
               <span class="time">{row.time}</span>
-              <span class="activity">{row.activity}</span>
+              <span class="activity">{row.kind === 'break' && <span class="break-icon" aria-hidden="true">☕</span>}{row.activity}</span>
             </div>
           </div>
         )
@@ -290,7 +288,7 @@ const organisers = [
       <div class="keynote-body">
         <div class="role">Colby College</div>
         <h3>Dr. Naser Al Madi</h3>
-        <p class="affil">Opening invited talk &middot; 09:05–09:45</p>
+        <p class="affil">Opening invited talk &middot; 14:05–14:45</p>
         <p class="talk-title">Eye-Tracking Insights for AI Developer Tools</p>
         <p class="lead-text">
           Dr. Al Madi's research models how developers read and comprehend source code using eye-tracking
